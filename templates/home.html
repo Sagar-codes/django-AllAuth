@@ -1,0 +1,32 @@
+{% load socialaccount %}
+
+<h1>Django AllAuth Tutorial</h1>
+
+{% if request.user.is_authenticated %}
+    <h1>Welcome {{request.user.username}}</h1>
+    <a href="{% url 'account_logout' %}">Log out</a>
+{% else %}
+    <a href="{% provider_login_url 'github' %}">Login with Github</a>
+    <br>
+    <a href="{% provider_login_url 'google' %}">Login with Google</a>
+    <br>
+    <a href="{% provider_login_url 'facebook' %}">Login with Facebook</a>
+{% endif %}
+
+<h1> <h2>For Google</h2>
+<p>
+    'Avatar URL: {{ user.socialaccount_set.all.0.get_avatar_url }}'
+</p>
+<p>
+    'UID: {{ user.socialaccount_set.all.0.uid }}'
+</p>
+<p>
+    'Date Joined: {{ user.socialaccount_set.all.0.date_joined}}'
+</p>
+<p>
+    'Last Login: {{ user.socialaccount_set.all.0.last_login}}'
+</p>
+<p>
+    'Full Name: {{ user.socialaccount_set.all.0.extra_data.name }}'
+</p>
+</h1>
